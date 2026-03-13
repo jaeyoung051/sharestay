@@ -1,0 +1,303 @@
+    };
+    try {
+      await signup(normalizedPayload);
+      alert("회원가입이 완료되었습니다. 로그인해 주세요.");
+      window.location.href = "/login";
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "회원가입에 실패했습니다. 다시 시도해 주세요.";
+      alert(message);
+    }
+  };
+
+  return (
+    <Box
+      sx={{
+        minHeight: "100vh",
+        bgcolor: "#f4f6fb",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        px: 2,
+        py: 6,
+      }}
+    >
+      <Stack spacing={2} alignItems="center" textAlign="center" mb={3}>
+        <Typography variant="h4" fontWeight={800} color="primary.main">
+          ShareStay+
+        </Typography>
+        <Box>
+          <Typography variant="h5" fontWeight={700}>
+            회원가입
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            이미 계정이 있으신가요?{" "}
+            <Link href="/login" underline="hover">
+              로그인
+            </Link>
+          </Typography>
+        </Box>
+      </Stack>
+
+      <Container maxWidth="sm" disableGutters>
+        <Paper
+          sx={{
+            p: { xs: 3, md: 4 },
+            borderRadius: 4,
+            boxShadow:
+              "0px 8px 20px rgba(15, 23, 42, 0.08), 0px 2px 6px rgba(15, 23, 42, 0.12)",
+          }}
+        >
+          <Stack spacing={2.5} component="form" onSubmit={handleSubmit(onSubmit)}>
+            <ControlledField
+              control={control}
+              name="username"
+              label="이메일"
+              placeholder="이메일을 입력하세요"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <PersonOutlineOutlinedIcon color="disabled" />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <ControlledField
+              control={control}
+              name="password"
+              label="비밀번호"
+              placeholder="비밀번호를 입력하세요"
+              type="password"
+              helperText="8자 이상, 영문/숫자 포함"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <LockOutlinedIcon color="disabled" />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <ControlledField
+              control={control}
+              name="confirmPassword"
+              label="비밀번호 확인"
+              placeholder="비밀번호를 다시 입력하세요"
+              type="password"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <LockOutlinedIcon color="disabled" />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <ControlledField
+              control={control}
+              name="nickname"
+              label="닉네임"
+              placeholder="닉네임을 입력하세요"
+            />
+            <ControlledField
+              control={control}
+              name="address"
+              label="주소"
+              placeholder="주소를 입력하세요"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <HomeOutlinedIcon color="disabled" />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <ControlledField
+              control={control}
+              name="phoneNumber"
+              label="연락처"
+              placeholder="연락처를 입력하세요"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <PhoneIphoneOutlinedIcon color="disabled" />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <ControlledField
+              control={control}
+              name="lifeStyle"
+              label="라이프스타일"
+              placeholder="반려동물 여부, 생활 패턴 등을 입력하세요"
+              multiline
+              minRows={3}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <NotesOutlinedIcon color="disabled" />
+                  </InputAdornment>
+                ),
+              }}
+            />
+
+            <Stack spacing={1}>
+              <Typography fontWeight={600}>역할 선택</Typography>
+              <Controller
+                control={control}
+                name="role"
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    select
+                    error={!!errors.role}
+                    helperText="호스트를 선택하면 관리자 승인이 필요할 수 있습니다."
+                  >
+                    {roles.map((role) => (
+                      <MenuItem key={role} value={role}>
+                        {role === "GUEST" ? "게스트 (방 찾기, 예약)" : "호스트 (룸 등록)"}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                )}
+              />
+            </Stack>
+
+            {selectedRole === "HOST" && (
+              <Stack spacing={1.5} sx={{ border: "1px solid #e3e8f7", p: 2, borderRadius: 2 }}>
+                <Typography fontWeight={600} color="primary.main">
+                  호스트 추가 정보
+                </Typography>
+                <Controller
+                  control={control}
+                  name="hostIntroduction"
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      value={field.value ?? ""}
+                      label="호스트 소개"
+                      placeholder="게스트에게 알려주고 싶은 내용을 입력하세요."
+                      multiline
+                      minRows={3}
+                      error={!!errors.hostIntroduction}
+                      helperText={errors.hostIntroduction?.message ?? "10자 이상 입력"}
+                    />
+                  )}
+                />
+                <Controller
+                  control={control}
+                  name="hostTermsAgreed"
+                  render={({ field }) => (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={field.value ?? false}
+                          onChange={(e) => field.onChange(e.target.checked)}
+                        />
+                      }
+                      label="호스트 약관에 동의합니다."
+                    />
+                  )}
+                />
+                {errors.hostTermsAgreed && (
+                  <Typography variant="caption" color="error">
+                    {errors.hostTermsAgreed.message}
+                  </Typography>
+                )}
+              </Stack>
+            )}
+
+            <Controller
+              control={control}
+              name="agreeTerms"
+              render={({ field }) => (
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={field.value}
+                      onChange={(e) => field.onChange(e.target.checked)}
+                    />
+                  }
+                  label="서비스 이용약관에 동의합니다."
+                />
+              )}
+            />
+            {errors.agreeTerms && (
+              <Typography variant="caption" color="error">
+                {errors.agreeTerms.message}
+              </Typography>
+            )}
+
+            <Controller
+              control={control}
+              name="agreePrivacy"
+              render={({ field }) => (
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={field.value}
+                      onChange={(e) => field.onChange(e.target.checked)}
+                    />
+                  }
+                  label="개인정보 수집 및 이용에 동의합니다."
+                />
+              )}
+            />
+            {errors.agreePrivacy && (
+              <Typography variant="caption" color="error">
+                {errors.agreePrivacy.message}
+              </Typography>
+            )}
+
+            <Button
+              type="submit"
+              variant="contained"
+              size="large"
+              disabled={isSubmitting}
+              sx={{ borderRadius: 2, py: 1.4, fontWeight: 700, mt: 1 }}
+            >
+              {isSubmitting ? "가입 중..." : "회원가입"}
+            </Button>
+          </Stack>
+        </Paper>
+      </Container>
+    </Box>
+  );
+}
+
+type FieldProps = {
+  label: string;
+  placeholder?: string;
+  helperText?: string;
+  errorMessage?: string;
+  name: keyof FormValues;
+  control: any;
+} & ComponentProps<typeof TextField>;
+
+function ControlledField({
+  label,
+  errorMessage,
+  helperText,
+  control,
+  name,
+  ...rest
+}: FieldProps) {
+  return (
+    <Stack spacing={1}>
+      <Typography fontWeight={600}>{label}</Typography>
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            value={field.value ?? ""}
+            error={!!errorMessage}
+            helperText={errorMessage ?? helperText}
+            {...rest}
+          />
+        )}
+      />
+    </Stack>
+  );
+}
