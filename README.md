@@ -1,161 +1,194 @@
-# ShareStay+
-🏠 룸쉐어/자취방을 공유하고 찾을 수 있는 방 매칭 플랫폼
+# 🏠 ShareStay+
+룸쉐어 / 자취방을 공유하고 찾을 수 있는 **위치 기반 방 매칭 플랫폼**
 
 ---
 
-## 1. 프로젝트 개요
-ShareStya+는 안전하고 효율적인 매칭 서비스의 부재를 해결하기 위해 만든 웹 서비스입니다. 
+## 📌 프로젝트 개요
 
-- 개발 기간: 2025.10.29 ~ 2025.12.10
-- 팀 인원: 5명 (FE 2명, BE 3명)
-- 주요 타겟: 자취방/룸메이트를 찾는 대학생 및 직장인
+**ShareStay+**는 기존의 비공식적인 방 거래에서 발생하는  
+신뢰성 부족과 정보 불균형 문제를 해결하기 위해 개발된 웹 서비스입니다.
 
-### 🎯 기획 의도
-- 기존의 비공식 거래는 신뢰성 및 안전성 문제가 있었고, 원하는 조건으로 방과 룸메이트를 구할 수 없다는 단점이 있었습니다.
-- 이를 보완하여 사용자들이 위치, 가격, 조건, 룸메이트의 라이프 스타일 등을 기반으로 방/룸메이트를 쉽게 찾을 수 있도록 하는 것을 목표로 합니다.
+- 📅 개발 기간: 2025.10.29 ~ 2025.12.10  
+- 👥 팀 구성: 5명 (Frontend 2명, Backend 3명)  
+- 🎯 타겟 사용자: 자취방 / 룸메이트를 찾는 대학생 및 직장인  
 
 ---
 
-## 2. 주요기능
+## 🎯 프로젝트 목적
 
-### 👤 사용자/회원
-
-- 회원가입 / 로그인 (일반 + OAuth 로그인)
-- 내 정보 조회 및 수정
-- Host / Guest 역할 구분 (예: 방 등록자 vs 방 찾는 사람)
-
-### 🏠 방(룸) 관련 기능
-
-- 방 등록 / 수정 / 삭제 (호스트 전용)
-- 방 이미지 업로드
-- 방 목록 조회 (페이지네이션, 정렬, 필터)
-- 키워드 / 조건 기반 검색 (지역, 가격, 방 유형 등)
-- 방 상세 페이지(지도, 설명, 옵션, 이미지, 공유 링크 등)
-
-  ### ⭐ 기타 기능 (예시)
-
-- 방 찜하기 (즐겨찾기)
-- 공유 링크 생성 및 접속
-- Ban 기능 (악성 사용자 제재 예정)
+- 실제 서비스와 유사한 구조의 팀 프로젝트 경험
+- 프론트엔드–백엔드 간 인증/인가 흐름 이해
+- JWT / OAuth2 기반 로그인 구조 구현
+- 협업 과정에서 발생하는 문제 해결 경험 축적
 
 ---
-## 3. 기술 스택
 
-### 🔧 Backend
+## 🧠 차별화 요소
+
+- 📍 **위치 기반 매칭 시스템**
+  - Kakao Map API를 활용한 지도 기반 방 탐색
+
+- 🔒 **신뢰성 중심 정보 제공**
+  - 사용자 활동 및 매물 정보를 기반으로 신뢰도 고려
+
+- 👥 **라이프스타일 기반 룸메이트 매칭**
+  - 단순 조건이 아닌 생활 패턴 기반 탐색
+
+- 🔗 **공유 링크 기능**
+  - 특정 매물을 외부 사용자에게 쉽게 공유
+
+---
+
+## 📸 주요 기능 (GIF)
+
+### 메인 페이지
+![alt text](<팀 프로젝트 GIF/KakaoTalk_20260211_154835960-ezgif.com-video-to-gif-converter.gif>)
+
+### 방 찾기
+![image](./팀%20프로젝트%20GIF/1-ezgif.com-video-to-gif-converter.gif)
+
+### 지도 기반 탐색
+![alt text](<팀 프로젝트 GIF/ezgif.com-video-to-gif-converter (4).gif>)
+
+### 방 상세보기
+![alt text](<팀 프로젝트 GIF/ezgif.com-video-to-gif-converter (3).gif>)
+
+### 방 등록
+![alt text](<팀 프로젝트 GIF/ezgif.com-video-to-gif-converter (2).gif>)
+
+---
+
+## 🏠 주요 기능
+
+### 👤 사용자 / 인증
+
+- JWT 기반 로그인 (Access Token / Refresh Token)
+- Google OAuth2 로그인
+- 역할 기반 권한 관리 (GUEST / HOST / ADMIN)
+
+---
+
+### 🏡 방(룸) 관리
+
+- 방 등록 / 수정 / 삭제 (HOST 권한)
+- 이미지 업로드 (Firebase Storage)
+- 목록 조회 + 페이지네이션 + 필터링
+- 지도 기반 위치 탐색 및 클러스터링
+- 상세 페이지 제공
+
+---
+
+### ⭐ 사용자 편의 기능
+
+- 즐겨찾기 (찜)
+- 공유 링크 생성
+- 관리자 기능 (회원 관리 / 정지)
+
+---
+
+## 🏗 시스템 아키텍처
+
+> **Client (React)** ↔ **Backend (Spring Boot)** ↔ **Database (MariaDB)** / **Storage (Firebase)**
+
+![architecture](https://github.com/user-attachments/assets/f12e2e60-b5a5-4429-a349-8b2fc65ab418)
+
+---
+
+## 🔧 기술 스택
+
+### Backend
 
 - Java 17
 - Spring Boot
 - Spring Data JPA / Hibernate
-- Spring Security, JWT
+- Spring Security + JWT
+- OAuth2 (Google)
 - MariaDB
-- Gradle
+- Firebase Storage
 
-### 🎨 Frontend
+---
 
-- React
-- TypeScript
+### Frontend
+
+- React 18 + TypeScript
 - Vite
 - MUI (Material UI)
+- React Router v6
 - React Query / Axios
+- react-hook-form + zod
 
-### 🛠 Dev & 협업
+---
 
-- GitHub (Organization / Branch 전략)
-- IntelliJ IDEA, VSCode
-- Postman, Swagger(OpenAPI)
+### Dev & 협업
+
+- GitHub (Organization 기반 협업)
+- GitHub Flow (feature 브랜치 전략)
+- PR 기반 코드 리뷰
+- Swagger(OpenAPI), Postman
 - ERDCloud / Miro
 
+---
+
+## 🔐 인증 구조
+
+- 로그인 성공 시 JWT 발급
+- OAuth2 로그인 후 JWT를 프론트로 전달
+- 프론트는 sessionStorage 기반으로 상태 관리
+- Spring Security 기반 권한 처리
 
 ---
 
-## 5. API & ERD (선택)
+## 📡 API 명세
 
-- **API 문서**: Swagger UI를 통해 자동 문서화  
-  - 예: `/swagger-ui/index.html`
+- Swagger UI: http://localhost:8080/swagger-ui/index.html
 
-- **주요 엔드포인트 예시**
-  - `POST /api/auth/signup` – 회원가입
-  - `POST /api/auth/login` – 로그인(JWT 발급)
-  - `GET /api/rooms` – 방 목록 조회
-  - `POST /api/rooms` – 방 등록
-  - `GET /api/rooms/{roomId}` – 방 상세 조회
-  - `GET /api/rooms/search` - 방 검색
-  - `GET /api/{rooms}/share` - 공유 링크 조회
+---
 
+## 🗄 ERD
 
-- **ERD**:
-<img width="1269" height="648" alt="image" src="https://github.com/user-attachments/assets/236262d9-cbe8-4fb3-9377-0086886b504e" />
+![ERD](https://github.com/user-attachments/assets/236262d9-cbe8-4fb3-9377-0086886b504e)
 
+---
 
+## 🧩 Trouble Shooting
 
-# ShareStay+ Frontend
+- 인증 구조 불일치로 인한 로그인 문제 해결
+- OAuth2 리다이렉트 이슈 해결
+- Git 충돌 및 fast-forward 문제 해결
+- 공유 링크 기능 개선
 
-안전하고 신뢰할 수 있는 룸메이트 매칭 플랫폼 **ShareStay+** 의 프론트엔드 저장소입니다.  
-React + TypeScript + Vite 기반으로 구축되었으며, MUI 디자인 시스템을 활용해 제품 UI를 구현합니다.
+👉 상세:  
+https://velog.io/@seojaeyeong-051/series/TeamProject-sharestay
 
-## 주요 화면
+---
 
-- **홈**: 서비스 소개, 추천 매물, 지역별 안전도 등 핵심 지표를 제공하는 랜딩 페이지
-- **로그인/회원가입**: 새롭게 디자인된 인증 플로우 (이메일/비밀번호, Google OAuth)
-- **방 찾기**: 필터, 정렬, 카드형 결과 목록이 포함된 검색 UI
-- **이용방법**: ShareStay+ 사용 가이드, 단계별 안내
-- **룸메이트 모집하기**: 매물 정보를 입력할 수 있는 폼 기반 화면
-- **약관/개인정보/비밀번호 찾기** 등 정책 & 지원 관련 정적 페이지
+## 👨‍💻 담당 역할
 
-## 기술 스택
+- 백엔드 인증/인가 구조 설계 및 구현
+- OAuth2 로그인 흐름 구현
+- 프론트–백엔드 인증 연동 문제 해결
+- 공유 기능 로직 개선 및 API 설계
+- Git 브랜치 전략 및 충돌 해결
 
-- **React 18 + TypeScript**
-- **Vite** 번들러 (HMR + 빠른 개발 환경)
-- **Material UI (MUI)** 컴포넌트 라이브러리
-- **React Router v6** 라우팅
-- **react-hook-form + zod** 폼 상태/검증
-- **Axios** API 통신 레이어
-- **Google OAuth** 연동
+---
 
-## 실행 방법
+## 💡 회고
+
+이 프로젝트를 통해 단순 기능 구현을 넘어  
+**구조 설계와 팀 상황을 고려한 판단의 중요성**을 배웠습니다.
+
+특히 인증 구조 변경 과정에서  
+이상적인 설계보다 현실적인 선택과 롤백 결정이  
+프로젝트 완성도에 더 중요하다는 것을 경험했습니다.
+
+---
+
+## 🚀 실행 방법
+
+### Backend
 
 ```bash
-pnpm install        # 또는 npm install, yarn install
-pnpm run dev        # 개발 서버 실행 (http://localhost:5173)
-pnpm run build      # 프로덕션 빌드
-pnpm run preview    # 빌드 결과 미리보기
-pnpm run lint       # ESLint 검사
-```
+git clone https://github.com/{your-repo-url}.git
+cd sharestaybackend
 
-> ⚠️  `VITE_GOOGLE_CLIENT_ID` 환경변수가 `.env` 혹은 실행 환경에 설정되어 있어야 Google 로그인 기능이 동작합니다.
-
-## 폴더 구조 (발췌)
-
-```
-src/
-├── auth/            # 인증 컨텍스트, 타입, 훅
-├── components/      # 공통 UI 컴포넌트 (헤더, 푸터, 폼 필드 등)
-├── lib/             # Axios 래퍼 등 유틸
-├── pages/           # 각 라우트별 화면 컴포넌트
-├── routes/          # 보호 라우터 등 라우팅 관련 코드
-└── index.css        # 글로벌 스타일
-```
-
-## 라우팅
-
-- `/` 홈
-- `/login`, `/signup`
-- `/rooms`, `/guide`, `/list-room`, `/safety-map`
-- `/forgot-password`, `/terms`, `/privacy`
-- `/profile`, `/admin` (보호 라우트)
-
-`src/App.tsx`에서 전체 라우팅 구성을 확인할 수 있으며, 일부 페이지는 향후 백엔드 API 연동에 맞춰 확장됩니다.
-
-## 디자인 & 브랜드 가이드
-
-- 주요 색상: `#0c51ff` (Primary), `#f4f6fb` (Background)
-- 타이포그래피: [@fontsource/roboto](https://fontsource.org/fonts/roboto)
-- 공통 요소: 고정 상담 버튼, Sticky 헤더, 카드형 UI
-
-## 향후 작업 예정
-
-- 실데이터 연동 (매물 목록, 지도, 룸메이트 매칭 API)
-- 검색/필터/폼 제출과 같은 상호작용에 대한 백엔드 연결
-- 반응형/접근성 개선 및 E2E 테스트 도입
-
----
+./gradlew bootRun
