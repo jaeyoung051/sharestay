@@ -78,7 +78,7 @@
 
 ---
 
-### ⭐ 사용자 편의 기능
+### ⭐ 편의 기능
 
 - 즐겨찾기 (찜)
 - 공유 링크 생성
@@ -110,13 +110,10 @@
 
 ### Frontend
 
-- React 18 + TypeScript
+- React + TypeScript
 - Vite
 - MUI (Material UI)
-- React Router v6
-- React Query / Axios
-- react-hook-form + zod
-
+  
 ---
 
 ### Dev & 협업
@@ -192,3 +189,11 @@ git clone https://github.com/{your-repo-url}.git
 cd sharestaybackend
 
 ./gradlew bootRun
+```
+
+### Frontend
+
+```bash
+npm install
+npm run dev
+```
