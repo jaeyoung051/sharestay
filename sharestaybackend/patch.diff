@@ -1,0 +1,18 @@
+*** Begin Patch
+*** Update File: src/main/java/com/example/sharestay/service/RoomService.java
+@@
+     public List<RoomResponse> getRoomList() {
+         return roomRepository.findAll()   // 전체 조회 or 추후 필터 추가 예정
+                 .stream()
+                 .map(this::toResponse)    // Room → RoomResponse 변환
+                 .collect(Collectors.toList());
+     }
++
++    @Transactional(readOnly = true)
++    public List<RoomResponse> getRoomsByHost(Long hostId) {
++        List<Room> rooms = roomRepository.findByHostId(hostId);
++        return rooms.stream()
++                .map(this::toResponse)
++                .collect(Collectors.toList());
++    }
+*** End Patch

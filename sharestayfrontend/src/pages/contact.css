@@ -1,0 +1,87 @@
+.contact-wrapper {
+  display: flex; /* 변경: 구분자 수정 */
+  justify-content: center;
+  padding: 50px 20px;
+  background: #f7f7f7;
+  min-height: 100vh;
+}
+
+.contact-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 40px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn { /* 변경: 공백 정리 */
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.contact-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.contact-desc {
+  margin-bottom: 30px;
+  font-size: 15px;
+  color: #555;
+}
+
+.contact-form .form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #222;
+} /* 변경: 누락된 닫는 중괄호 추가 */
+
+.contact-form input,
+.contact-form textarea {
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+  transition: 0.2s ease;
+  background: #fafafa;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #6c63ff;
+  background: white;
+  outline: none;
+  box-shadow: 0 0 6px rgba(108, 99, 255, 0.3);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  height: 140px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.submit-btn:hover {
+  background: #554bef;
+}
